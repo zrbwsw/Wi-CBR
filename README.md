@@ -1,1 +1,1 @@
-# Wi-PD
+# Wi-CBR
