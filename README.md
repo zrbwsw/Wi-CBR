@@ -1,4 +1,4 @@
-# Wi-CBR
+# Wi-CBR code
 XRF55 Dataset:https://aiotgroup.github.io/XRF55/
 Widar3.0 Dataset:https://tns.thss.tsinghua.edu.cn/widar3.0/
 
