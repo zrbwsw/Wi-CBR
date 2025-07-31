@@ -4,7 +4,7 @@ Widar3.0 Dataset:https://tns.thss.tsinghua.edu.cn/widar3.0/
 
 This project contains two folders, matlab and python. The former is used to preprocess and visualize Wifi data, and the later is our Wi-CBR for human behavior recognition, and please change the pretrained to 'True' of the ResNet model
 If you have any question, please refer to zrb@mail.hfut.edu.cn.
-## Mapping Method:
+## Widar Mapping Method:
 
 `uname-mn-ln-on-rn-rsn.dat` (rsn: 1-6)  
 `envs-suname-mn-ln-on-rn.mat` (4D array in storage order: subcarrier dimension, receiver dimension, transmitter dimension, timestamp dimension)
@@ -26,6 +26,7 @@ Skip empty files during loading: `12-2-2-3-5`, `13-1-1-1-1`, `13-3-3-3-5`, `14-1
 | 20181204.zip | 2 | 9 (1-6) | User1 | 16 | 750 |
 | 20181211.zip | 3 | 6 | User3,7,8,9 | 11~14 | 3000 |
 
+## XRF55 as same as https://aiotgroup.github.io/XRF55/
 
 **Feature set **
 We will also propose the feture set we used.
