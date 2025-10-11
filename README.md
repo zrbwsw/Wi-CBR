@@ -28,5 +28,5 @@ Skip empty files during loading: `12-2-2-3-5`, `13-1-1-1-1`, `13-3-3-3-5`, `14-1
 
 ## XRF55 as same as https://aiotgroup.github.io/XRF55/
 
-**Feature set **
-We will also propose the feture set we used.
+**Feature set**
+We also propose the feature set we used https://drive.google.com/drive/folders/11ANLuUHMFhvqqyXNB1MyXZaTDI_9HbK5?usp=sharing.
