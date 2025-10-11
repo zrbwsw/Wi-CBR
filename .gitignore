@@ -1,0 +1,82 @@
+# MATLAB generated files
+*.asv
+*.m~
+*.mat
+*.fig
+*.p
+*.mex*
+*.slx.autosave
+*.slxc
+slprj/
+*.slxc
+
+# Python generated files
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Log files
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# Large data files (uncomment if you have large datasets)
+# *.dat
+# *.bin
+# *.csv
+# *.xlsx
+
+# Generated images (if you don't want to track them)
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.bmp
+*.tiff
+
+# Backup files
+*.bak
+*.backup
