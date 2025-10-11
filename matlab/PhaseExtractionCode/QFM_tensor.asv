@@ -1,0 +1,69 @@
+% CSI 数据解析和去噪处理，按顺序存储为四维数组（子载波维度, 接收器维度, 发射器维度, 时间戳维度）
+
+filepath = 'D:\Widar3.0\CSI\20181205\user2\'; % 原始 CSI 数据路径
+savepath = 'D:\Widar3.0\QFM_MAT\17'; % 保存处理后的数据路径
+uname = 'user2'; % 文件命名中的用户名
+suname = '11'; % 保存文件的基础名称
+envs = 2; % 初始化环境变量
+
+% 初始化存储 CSI 数据的四维数组
+Num_subcarrier = 30; % 子载波数量
+Num_receivers = 6; % 接收器数量
+Num_transmitters = 1; % 发射器数量
+Max_timestamp = 100; % 假设时间戳的最大值，根据数据情况调整
+
+csi_data = zeros(Num_subcarrier, Num_receivers, Num_transmitters, Max_timestamp); % 初始化四维数组
+
+for mn = 1:2 % 手势类型循环
+    for ln = 1:5 % 位置循环
+        for on = 1:5 % 朝向循环
+            for rn = 1:5 % 重复次数循环
+                for rsn = 1:6 % 接收器循环
+                    mfm = zeros(1, 3); % 存储每个天线的均值与方差比率
+
+                    % 构建文件名
+                    filename = [filepath, uname, '-', num2str(mn), '-', num2str(ln), '-', num2str(on), '-', num2str(rn), '-r', num2str(rsn), '.dat'];
+                    
+                    % 从文件读取原始 CSI 数据
+                    c1 = read_bf_file(filename);
+                    dl = length(c1); % 获取数据长度
+                    package = zeros(90, dl); % 初始化包以存储 CSI 值
+
+                    % 从数据中提取 CSI 结构体数组
+                    csi_trace = c1(1:dl, 1);
+                    for j2 = 1:3 % 遍历三个天线
+                        for i = 1:dl % 遍历所有 CSI 条目
+                            csi_entry = csi_trace{i}; % 获取当前 CSI 条目
+                            csi = get_scaled_csi(csi_entry); % 对 CSI 条目进行缩放
+                            j1 = 1; % 只有一个发射器
+                            for j3 = 1:Num_subcarrier % 遍历每个子载波
+                                package((j2 - 1) * 30 + j3, i) = csi(j1, j2, j3);
+                            end
+                        end
+
+                        % 计算当前天线的均值与方差比率
+                        package1 = abs(package((j2 - 1) * 30 + 1:(j2 - 1) * 30 + 30, :));
+                        mf = mean(mean(package1) ./ var(package1)); % 均值-方差比率
+                        mfm(1, j2) = mf; % 将比率存储到天线的数组中
+                    end
+
+                    % 找到均值与方差比率最大的天线和最小的天线
+                    [~, nma] = max(mfm);
+                    [~, nmi] = min(mfm);
+
+                    % 计算最大天线和最小天线之间的 CSI 比率
+                    csiqdata = package((nma - 1) * 30 + 1:(nma - 1) * 30 + 30, :) ./ ...
+                               package((nmi - 1) * 30 + 1:(nmi - 1) * 30 + 30, :);
+
+                    % 存储到四维数组中
+                    csi_data(:, rsn, j1, 1:dl) = angle(csiqdata);
+
+                end
+                % 构建保存的文件名
+                sname = [num2str(envs), '-', suname, '-', num2str(mn + 4), '-', num2str(ln), '-', num2str(on), '-', num2str(rn)];
+                save(fullfile(savepath, [sname, '.mat']), 'csi_data');
+                disp(['保存 ', sname, ' 成功。']);
+            end
+        end
+    end
+end
