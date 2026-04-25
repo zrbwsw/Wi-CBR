@@ -70,7 +70,7 @@ class DPFusion(nn.Module):
 
         PD_Strenth = Strenth * x  # Important feature preservation
         PD_Weak = Weak * x  # Secondary feature attenuation
-        y = self.reconstruct(PD_Strenth, PD_Strenth)  # Feature reconstruction
+        y = self.reconstruct(PD_Strenth, PD_Weak)  # Feature reconstruction
         return y
 
     def reconstruct(self, PD_Strenth, PD_Weak):            
