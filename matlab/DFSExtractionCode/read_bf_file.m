@@ -4,12 +4,10 @@
 %
 % (c) 2008-2011 Daniel Halperin <dhalperi@cs.washington.edu>
 %
-function ret = read_bf_file(filename)
-%% Input check
+
 % narginchk(1,1);
     narginchk(1,1);
 
-%% Open file
 f = fopen(filename, 'rb');
 if (f < 0)
     error('Couldn''t open file %s', filename);
@@ -33,14 +31,12 @@ if status ~= 0
     return;
 end
 
-%% Initialize variables
 ret = cell(ceil(len/95),1);     % Holds the return values - 1x1 CSI is 95 bytes big, so this should be upper bound
 cur = 0;                        % Current offset into file
 count = 0;                      % Number of records output
 broken_perm = 0;                % Flag marking whether we've encountered a broken CSI yet
 triangle = [1 3 6];             % What perm should sum to for 1,2,3 antennas
 
-%% Process all entries in file
 % Need 3 bytes -- 2 byte size field and 1 byte code
 while cur < (len - 3)
     % Read size and code
@@ -83,6 +79,5 @@ while cur < (len - 3)
 end
 ret = ret(1:count);
 
-%% Close file
 fclose(f);
 end
