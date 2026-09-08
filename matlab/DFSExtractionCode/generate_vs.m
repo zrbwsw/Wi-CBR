@@ -13,7 +13,7 @@ rx_acnt = 3;    % Antenna count for each receiver
 dpth_pwd = './';
 dpth_date = 'Data';
 dpth_people = 'userA';
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 dpth_ges = [dpth_pwd, dpth_date, '/'];
 dpth_vs = [dpth_pwd, 'BVP/'];
 
